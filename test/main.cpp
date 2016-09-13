@@ -13,3 +13,7 @@ int main()
 TEST (first, first) {
     FAIL("test...");
 }
+
+TEST (second, first) {
+    FAIL("test 2...");
+}
