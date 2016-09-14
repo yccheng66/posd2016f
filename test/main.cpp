@@ -9,12 +9,21 @@ int main()
 
     return 0;
 }
+
+int one () {return 1;}
+
+int two() {return 2;}
+
 // added this line
 TEST (first, first) {
-    FAIL("test...");
+    LONGS_EQUAL(1, one());
 }
 
 TEST (second, first) {
-    FAIL("test 2...");
+    CHECK(true);
+}
+
+TEST (thrid, first) {
+    LONGS_EQUAL(2,two());
 }
 //added this later

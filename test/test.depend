@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1473839895 source:c:\users\posd\desktop\posd2016f\test\main.cpp
+	"..\cppunitlite\TestHarness.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testharness.h
+	"Test.h"
+	"TestResult.h"
+	"Failure.h"
+	"TestRegistry.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\test.h
+	<cmath>
+	"SimpleString.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\simplestring.h
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testresult.h
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\failure.h
+	"SimpleString.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testregistry.h
+
