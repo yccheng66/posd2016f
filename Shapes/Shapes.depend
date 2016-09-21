@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1474442866 source:c:\users\posd\desktop\posd2016f\shapes\main.cpp
+	"..\cppunitlite\TestHarness.h"
+	"utShapes.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testharness.h
+	"Test.h"
+	"TestResult.h"
+	"Failure.h"
+	"TestRegistry.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\test.h
+	<cmath>
+	"SimpleString.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\simplestring.h
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testresult.h
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\failure.h
+	"SimpleString.h"
+
+1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testregistry.h
+
+1474444162 c:\users\posd\desktop\posd2016f\shapes\utshapes.h
+	"..\cppunitlite\TestHarness.h"
+	"Shapes.h"
+
+1474444322 c:\users\posd\desktop\posd2016f\shapes\shapes.h
+
