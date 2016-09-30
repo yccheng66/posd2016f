@@ -25,17 +25,10 @@ private:
     double cx,cy,r;
 };
 
-double sumOfArea(std::vector<Rectangle> rects) {
+double sumOfArea(const std::vector<Shape *> & shapes) {
     double total =0;
-    for (Rectangle r: rects)
-        total += r.area();
-    return total;
-}
-
-double sumOfArea(std::vector<Shape *> rects) {
-    double total =0;
-    for (Shape *r: rects)
-        total += r->area();
+    for (Shape *s: shapes)
+        total += s->area();
     return total;
 }
 

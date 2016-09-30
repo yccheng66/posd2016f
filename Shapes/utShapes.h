@@ -18,20 +18,6 @@ TEST(sencond,Circle)
     DOUBLES_EQUAL(300,circ.area(),epsilon);
 }
 
-TEST (third, sumOfArea) {
-    Rectangle r1(0,0,4,2);
-    Rectangle r2(0,0,3,3);
-    std::vector<Rectangle> rects;
-    rects.push_back(r1);
-    rects.push_back(r2);
-    DOUBLES_EQUAL(17, sumOfArea(rects),epsilon);
-}
-
-TEST (fourth, sumOfArea) {
-    std::vector<Rectangle> rects;
-    DOUBLES_EQUAL(0, sumOfArea(rects),epsilon);
-}
-
 TEST (fifth, sumOfArea) {
     Rectangle r1(0,0,4,2);
     Circle c1(0,0,10);
