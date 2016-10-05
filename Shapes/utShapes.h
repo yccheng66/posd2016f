@@ -7,7 +7,8 @@
 
 const double epsilon = 0.000001;
 // added this line
-TEST (first, Rectangle) {
+TEST (first, Rectangle)
+{
     Rectangle rect(0,0,4,2);
     DOUBLES_EQUAL(8,rect.area(),epsilon);
 }
@@ -18,12 +19,43 @@ TEST(sencond,Circle)
     DOUBLES_EQUAL(300,circ.area(),epsilon);
 }
 
-TEST (fifth, sumOfArea) {
+TEST (fifth, sumOfArea)
+{
     Rectangle r1(0,0,4,2);
     Circle c1(0,0,10);
     std::vector<Shape *> ss;
     ss.push_back(&r1);
     ss.push_back(&c1);
     DOUBLES_EQUAL(308,sumOfArea(ss),epsilon);
+}
+
+TEST (comboShapeArea, combo)
+{
+    Rectangle r1(0,0,4,2);
+    Circle c1(0,0,10);
+    std::vector<Shape *> ss{&r1,&c1};
+    ComboShape shape(ss);
+    DOUBLES_EQUAL(308,shape.area(),epsilon);
+}
+
+TEST (addShape, combo)
+{
+    Rectangle r1(0,0,4,2);
+    Circle c1(0,0,10);
+    std::vector<Shape *> ss{&r1};
+    ComboShape shape(ss);
+    shape.add(&c1);
+    DOUBLES_EQUAL(308,shape.area(),epsilon);
+}
+TEST (addCombo, combo)
+{
+    Rectangle r1(0,0,4,2);
+    Circle c1(0,0,10);
+    std::vector<Shape *> ss{&r1,&c1};
+    std::vector<Shape *> sss{&c1};
+    ComboShape shape(ss);
+    ComboShape s2(sss);
+    s2.add(&shape);
+    DOUBLES_EQUAL(608,s2.area(),epsilon);
 }
 #endif // UTSHAPES_H_INCLUDED
