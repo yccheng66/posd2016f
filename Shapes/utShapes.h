@@ -3,6 +3,7 @@
 
 #include "..\cppunitlite\TestHarness.h"
 #include "Shapes.h"
+#include "ShapeMedia.h"
 #include <vector>
 
 const double epsilon = 0.000001;
@@ -29,33 +30,25 @@ TEST (fifth, sumOfArea)
     DOUBLES_EQUAL(308,sumOfArea(ss),epsilon);
 }
 
-TEST (comboShapeArea, combo)
-{
+
+
+
+
+
+TEST ( seven, media ) {
     Rectangle r1(0,0,4,2);
-    Circle c1(0,0,10);
-    std::vector<Shape *> ss{&r1,&c1};
-    ComboShape shape(ss);
-    DOUBLES_EQUAL(308,shape.area(),epsilon);
+    ShapeMedia sR1( &r1 ) ;
+    DOUBLES_EQUAL(8,sR1.area(),epsilon);
 }
 
-TEST (addShape, combo)
-{
+TEST ( eight, comboMedia ) {
     Rectangle r1(0,0,4,2);
-    Circle c1(0,0,10);
-    std::vector<Shape *> ss{&r1};
-    ComboShape shape(ss);
-    shape.add(&c1);
-    DOUBLES_EQUAL(308,shape.area(),epsilon);
+    Rectangle r2(0,0,4,3);
+    ShapeMedia sR1( &r1 ) ;
+    ShapeMedia sR2( &r2 ) ;
+    std::vector<Media *> ss{&sR1,&sR2};
+    ComboMedia cm(ss);
+    DOUBLES_EQUAL(20,cm.area(),epsilon) ;
 }
-TEST (addCombo, combo)
-{
-    Rectangle r1(0,0,4,2);
-    Circle c1(0,0,10);
-    std::vector<Shape *> ss{&r1,&c1};
-    std::vector<Shape *> sss{&c1};
-    ComboShape shape(ss);
-    ComboShape s2(sss);
-    s2.add(&shape);
-    DOUBLES_EQUAL(608,s2.area(),epsilon);
-}
+
 #endif // UTSHAPES_H_INCLUDED

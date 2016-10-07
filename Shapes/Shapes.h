@@ -39,23 +39,6 @@ private:
     double cx,cy,r;
 };
 
-class ComboShape : public Shape
-{
-public:
-    ComboShape(const std::vector<Shape*>& shapes):shapes(shapes) {}
-
-    double area() const
-    {
-        return sumOfArea(shapes);
-    }
-
-    void add(Shape* shape){
-    shapes.push_back(shape);
-    }
-
-private:
-    std::vector<Shape*> shapes;
-};
 
 double sumOfArea(const std::vector<Shape *> & shapes)
 {
