@@ -2,13 +2,15 @@
 #define SHAPES_H_INCLUDED
 
 #include <vector>
-
+#include <string>
+#include <sstream>
 
 
 class Shape
 {
 public:
     virtual double area() const = 0;
+    virtual std::string description() const {return std::string("");}
 };
 
 double sumOfArea(const std::vector<Shape *> & shapes);
@@ -22,6 +24,12 @@ public:
     {
         return l*w;
     }
+    std::string description() const {
+        std::stringstream ss;
+        ss << "r(" << x << " " << y << " " << l << " " << w << ") ";
+        return ss.str();
+    }
+
 private:
     double x,y,l,w;
 };
@@ -34,6 +42,11 @@ public:
     double area()const
     {
         return 3*r*r;
+    }
+    std::string description() const {
+        std::stringstream ss;
+        ss << "c(" << cx << " " << cy << " " << r << ") ";
+        return ss.str();
     }
 private:
     double cx,cy,r;
