@@ -85,4 +85,15 @@ TEST (IllegalAdd, ShapeMedia) {
         CHECK(std::string("Illegal: add on media") == s);
     }
 }
+
+TEST (ComboMedia, MediaBuilder) {
+    MediaBuilder mb;
+    ShapeMedia * mb.buildRectangle(0, 0, 4, 2);
+    ShapeMedia * mb.buildCircle(0,0,10);
+    ComboMedia * combo = mb.getComboMedia();
+    DescriptionVisitor dv;
+    combo->accept(&dv)
+    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
+}
+
 #endif // UTSHAPES_H_INCLUDED
