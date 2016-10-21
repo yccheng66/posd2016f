@@ -88,12 +88,31 @@ TEST (IllegalAdd, ShapeMedia) {
 
 TEST (ComboMedia, MediaBuilder) {
     MediaBuilder mb;
-    ShapeMedia * mb.buildRectangle(0, 0, 4, 2);
-    ShapeMedia * mb.buildCircle(0,0,10);
+
+    mb.buildComboMedia();
+    mb.buildRectangle(0, 0, 4, 2);
+    mb.buildCircle(0,0,10);
     ComboMedia * combo = mb.getComboMedia();
     DescriptionVisitor dv;
-    combo->accept(&dv)
+    combo->accept(&dv);
     CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
+
+}
+
+TEST (ComboMedia2, MediaBuilder) {
+    MediaBuilder mb;
+
+    mb.buildComboMedia();
+    Rectangle r(0,0,4,2);
+    mb.buildShapeMedia(&r);
+    Circle c(0,0,10);
+    mb.buildShapeMedia(&c);
+
+    ComboMedia * combo = mb.getComboMedia();
+    DescriptionVisitor dv;
+    combo->accept(&dv);
+    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
+
 }
 
 #endif // UTSHAPES_H_INCLUDED

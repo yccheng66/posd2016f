@@ -43,6 +43,7 @@ private:
     std::vector<Media*> media;
 public:
     ComboMedia( std::vector<Media*> m ) : media(m) {}
+    ComboMedia () {}
     double area( ) const {
         double total =0;
             for (Media *m: media)
@@ -66,4 +67,22 @@ void DescriptionVisitor::visitShapeMedia(ShapeMedia *sm) {
 void DescriptionVisitor::visitComboMedia(ComboMedia *cm) {
     desc = std::string("combo(")+desc+std::string(")");
 }
+
+class MediaBuilder {
+public:
+    MediaBuilder (): combo(0) {}
+    void buildComboMedia() {combo = new ComboMedia;}
+    void buildRectangle(double x, double y, double l, double w) {
+        combo->add(new ShapeMedia (new Rectangle(x,y,l,w)));
+    }
+    void buildCircle(double x, double y, double r) {
+        combo->add(new ShapeMedia (new Circle(x,y,r)));
+    }
+    void buildShapeMedia(Shape * s) {
+        combo->add(new ShapeMedia(s));
+    }
+    ComboMedia * getComboMedia() const {return combo;}
+private:
+    ComboMedia * combo;
+};
 #endif // SHAPEMEDIA_H_INCLUDED
