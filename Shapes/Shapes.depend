@@ -22,19 +22,20 @@
 
 1473838394 c:\users\posd\desktop\posd2016f\cppunitlite\testregistry.h
 
-1477021192 c:\users\posd\desktop\posd2016f\shapes\utshapes.h
+1477627128 c:\users\posd\desktop\posd2016f\shapes\utshapes.h
 	"..\cppunitlite\TestHarness.h"
 	"Shapes.h"
 	"ShapeMedia.h"
 	<vector>
 	<iostream>
+	<stack>
 
 1476417699 c:\users\posd\desktop\posd2016f\shapes\shapes.h
 	<vector>
 	<string>
 	<sstream>
 
-1477021188 c:\users\posd\desktop\posd2016f\shapes\shapemedia.h
+1477625351 c:\users\posd\desktop\posd2016f\shapes\shapemedia.h
 	"Shapes.h"
 	<vector>
 	<string>

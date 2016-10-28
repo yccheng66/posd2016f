@@ -86,19 +86,6 @@ TEST (IllegalAdd, ShapeMedia) {
     }
 }
 
-TEST (ComboMedia, MediaBuilder) {
-    MediaBuilder mb;
-
-    mb.buildComboMedia();
-    mb.buildRectangle(0, 0, 4, 2);
-    mb.buildCircle(0,0,10);
-    ComboMedia * combo = mb.getComboMedia();
-    DescriptionVisitor dv;
-    combo->accept(&dv);
-    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
-
-}
-
 TEST (ComboMedia2, MediaBuilder) {
     MediaBuilder mb;
 
@@ -115,4 +102,82 @@ TEST (ComboMedia2, MediaBuilder) {
 
 }
 
+TEST (ComboMedia3, MediaBuilder) {
+    MediaBuilder mb;
+
+    try{
+        Rectangle r(0,0,4,2);
+        mb.buildShapeMedia(&r);
+        FAIL("should not be here");
+    }catch(std::string s){
+        CHECK(std::string("null point ex")==s);
+    }
+}
+
+TEST (ComboMedia4, MediaBuilder) {
+    MediaBuilder mb;
+    mb.buildComboMedia();
+
+    Rectangle r(0,0,4,2);
+    mb.buildShapeMedia(&r);
+    Circle c(0,0,10);
+    mb.buildShapeMedia(&c);
+
+    MediaBuilder mb2;
+    mb2.buildComboMedia();
+
+    Rectangle r2(0,0,2,1);
+    mb2.buildShapeMedia(&r2);
+    Circle c2(0,0,5);
+    mb2.buildShapeMedia(&c2);
+
+    ComboMedia *cm = mb2.getComboMedia();
+    mb.buildAddComboMedia(cm);
+
+    DescriptionVisitor dv;
+    mb.getComboMedia()->accept(&dv);
+    // std::cout << dv.getDescription() << std::endl;
+    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) combo(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
+
+}
+
+#include<stack>
+TEST (ComboMedia5, MediaBuilder) {
+    std::stack<MediaBuilder *> mbs;
+    mbs.push(new MediaBuilder());
+    mbs.top()->buildComboMedia();
+
+    Rectangle r(0,0,4,2);
+    mbs.top()->buildShapeMedia(&r);
+    Circle c(0,0,10);
+    mbs.top()->buildShapeMedia(&c);
+
+    mbs.push(new MediaBuilder());
+    mbs.top()->buildComboMedia();
+
+    Rectangle r2(0,0,2,1);
+    mbs.top()->buildShapeMedia(&r2);
+    Circle c2(0,0,5);
+    mbs.top()->buildShapeMedia(&c2);
+    ComboMedia *cm = mbs.top()->getComboMedia();
+    mbs.pop();
+    mbs.top()->buildAddComboMedia(cm);
+
+    DescriptionVisitor dv;
+    mbs.top()->getComboMedia()->accept(&dv);
+    // std::cout << dv.getDescription() << std::endl;
+
+    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) combo(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
+
+}
 #endif // UTSHAPES_H_INCLUDED
+
+
+
+
+
+
+
+
+
+

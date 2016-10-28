@@ -7,11 +7,16 @@
 
 class ShapeMedia;
 class ComboMedia;
-class DescriptionVisitor {
+class Visitor {
+public:
+    virtual void visitShapeMedia(ShapeMedia *sm) = 0;
+    virtual void visitComboMedia(ComboMedia *cm, bool start) = 0;
+};
+class DescriptionVisitor : public Visitor{
 public:
     DescriptionVisitor (): desc(std::string("")) {}
     void visitShapeMedia(ShapeMedia *sm);
-    void visitComboMedia(ComboMedia *cm);
+    void visitComboMedia(ComboMedia *cm, bool start);
     std::string getDescription() const {return desc;}
 private:
     std::string desc;
@@ -51,9 +56,10 @@ public:
         return total;
     }
     void accept(DescriptionVisitor * dv) {
+        dv->visitComboMedia(this, true);
         for (Media *m: media)
             m->accept(dv);
-        dv->visitComboMedia(this);
+        dv->visitComboMedia(this, false);
     }
     void add (Media *m) {
         media.push_back(m);
@@ -64,22 +70,26 @@ void DescriptionVisitor::visitShapeMedia(ShapeMedia *sm) {
     desc += sm->getShape()->description();
 }
 
-void DescriptionVisitor::visitComboMedia(ComboMedia *cm) {
-    desc = std::string("combo(")+desc+std::string(")");
+void DescriptionVisitor::visitComboMedia(ComboMedia *cm, bool start) {
+    if(start)
+        desc = desc + std::string("combo(");
+    else
+        desc = desc + std::string(")");
+
 }
 
 class MediaBuilder {
 public:
     MediaBuilder (): combo(0) {}
     void buildComboMedia() {combo = new ComboMedia;}
-    void buildRectangle(double x, double y, double l, double w) {
-        combo->add(new ShapeMedia (new Rectangle(x,y,l,w)));
-    }
-    void buildCircle(double x, double y, double r) {
-        combo->add(new ShapeMedia (new Circle(x,y,r)));
-    }
     void buildShapeMedia(Shape * s) {
+        if(!combo)
+            throw std::string("null point ex") ;
         combo->add(new ShapeMedia(s));
+
+    }
+    void buildAddComboMedia(ComboMedia * cm){
+        combo->add(cm);
     }
     ComboMedia * getComboMedia() const {return combo;}
 private:
