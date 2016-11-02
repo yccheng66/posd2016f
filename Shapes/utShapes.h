@@ -62,7 +62,7 @@ TEST (ComboMedia, DescriptionVisitor) {
     ComboMedia cm(ss);
     DescriptionVisitor dv;
     cm.accept(&dv);
-    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
+    CHECK(std::string("x(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
 }
 
 TEST (ShapeMedia, DescriptionVisitor) {
@@ -98,7 +98,7 @@ TEST (ComboMedia2, MediaBuilder) {
     ComboMedia * combo = mb.getComboMedia();
     DescriptionVisitor dv;
     combo->accept(&dv);
-    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
+    CHECK(std::string("x(r(0 0 4 2) c(0 0 10) )") == dv.getDescription());
 
 }
 
@@ -137,7 +137,7 @@ TEST (ComboMedia4, MediaBuilder) {
     DescriptionVisitor dv;
     mb.getComboMedia()->accept(&dv);
     // std::cout << dv.getDescription() << std::endl;
-    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) combo(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
+    CHECK(std::string("x(r(0 0 4 2) c(0 0 10) x(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
 
 }
 
@@ -167,17 +167,15 @@ TEST (ComboMedia5, MediaBuilder) {
     mbs.top()->getComboMedia()->accept(&dv);
     // std::cout << dv.getDescription() << std::endl;
 
-    CHECK(std::string("combo(r(0 0 4 2) c(0 0 10) combo(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
+    CHECK(std::string("x(r(0 0 4 2) c(0 0 10) x(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
 
 }
+TEST (MediaDirector,MediaBuilder){
+    MediaDirector md(std::string("x(r(0 0 4 2) c(0 0 10) x(r(0 0 2 1) c(0 0 5) ))"));
+    md.build();
+    Media* m = md.getResult();
+    DescriptionVisitor dv;
+    m->accept(&dv);
+    CHECK(std::string("x(r(0 0 4 2) c(0 0 10) x(r(0 0 2 1) c(0 0 5) ))") == dv.getDescription());
+}
 #endif // UTSHAPES_H_INCLUDED
-
-
-
-
-
-
-
-
-
-
