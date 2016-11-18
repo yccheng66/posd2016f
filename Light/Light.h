@@ -10,41 +10,62 @@ class LightState{
 };
 class OffState : public LightState{
     public:
-        OffState(){}
+        static OffState* GetInstance();
         LightState * flip();
         std::string getLightState() const {return "off";}
         virtual ~OffState() {}
+    private:
+        OffState(){}
 };
+
+OffState* OffState::GetInstance(){
+    static OffState instance;
+    return &instance;
+}
 
 class MedState : public LightState{
     public:
-        MedState(){}
+        static MedState* GetInstance();
         LightState * flip();
         std::string getLightState() const {return "med";}
         virtual ~MedState() {}
+    private:
+        MedState(){}
 };
+
+MedState* MedState::GetInstance(){
+    static MedState instance;
+    return &instance;
+}
 
 class HighState : public LightState{
     public:
-        HighState(){}
+        static HighState* GetInstance();
         LightState * flip();
         std::string getLightState() const {return "high";}
         virtual ~HighState() {}
+    private:
+        HighState(){}
 
 };
 
+HighState* HighState::GetInstance(){
+    static HighState instance;
+    return &instance;
+}
+
 class Light{
 public:
-    Light(LightState* s=new OffState):state(s){}
+    Light(LightState* s=OffState::GetInstance()):state(s){}
     std::string getState()const
     {
         return state->getLightState();
     }
     void flip()
     {
-        LightState* ls = state;
+        //LightState* ls = state;
         state = state->flip();
-        delete ls;
+        //delete ls;
     }
 
 private:
@@ -52,15 +73,15 @@ private:
 };
 
 LightState * OffState :: flip(){
-    return new MedState;
+    return MedState::GetInstance();
 }
 
 LightState * MedState :: flip(){
-    return new HighState;
+    return HighState::GetInstance();
 }
 
 LightState * HighState :: flip(){
-    return new OffState;
+    return OffState::GetInstance();
 }
 
 #endif // LIGHT_H_INCLUDED

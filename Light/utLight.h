@@ -2,7 +2,7 @@
 #define UTLIGHT_H_INCLUDED
 #include <string>
 #include "Light.h"
-TEST(LIGHT,LIGHT)
+TEST(Light,Light)
 {
     Light light;
     CHECK(std::string("off")==light.getState());
@@ -17,14 +17,14 @@ TEST(flip,Light)
 
 TEST(medToHigh,Light)
 {
-    Light light(new MedState);
+    Light light(MedState::GetInstance());
     light.flip();
     CHECK(std::string("high")==light.getState());
 }
 
 TEST(hightoOff,Light)
 {
-    Light light(new HighState);
+    Light light(HighState::GetInstance());
     light.flip();
     CHECK(std::string("off")==light.getState());
 }
